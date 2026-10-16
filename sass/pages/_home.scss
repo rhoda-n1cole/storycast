@@ -1,0 +1,99 @@
+// sass/pages/_home.scss
+@use '../tokens/spacing' as sp;
+@use '../tokens/typography' as type;
+@use '../tokens/breakpoints' as bp;
+
+@layer pages {
+  // Featured story spotlight (Grid: image + text)
+  .spotlight {
+    display: grid;
+    gap: sp.space('lg');
+    align-items: center;
+
+    @include bp.up('md') {
+      grid-template-columns: 1fr 1.1fr;
+      gap: sp.space('xl');
+    }
+
+    &__figure {
+      position: relative;
+    }
+
+    &__img {
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      object-fit: cover;
+      object-position: top;
+      border-radius: sp.$radius-lg;
+      box-shadow: var(--shadow-md);
+
+      @include bp.up('md') {
+        aspect-ratio: 4 / 4.5;
+      }
+    }
+
+    &__caption {
+      margin-top: sp.space('2xs');
+      font-size: type.$font-size-sm;
+      color: var(--color-text-muted);
+    }
+
+    &__title {
+      margin-bottom: sp.space('sm');
+    }
+
+    &__quote {
+      margin-block: sp.space('md');
+      padding-left: sp.space('md');
+      border-left: 4px solid var(--color-accent);
+      font-family: type.$font-heading;
+      font-size: type.$font-size-lg;
+      color: var(--color-brand);
+    }
+
+    &__meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: sp.space('2xs') sp.space('md');
+      margin-bottom: sp.space('md');
+      font-size: type.$font-size-sm;
+      color: var(--color-text-muted);
+    }
+  }
+
+  // "How StoryCast works" steps
+  .pillars {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
+    gap: sp.space('md');
+    list-style: none;
+    padding: 0;
+
+    &__item {
+      padding: sp.space('md');
+      border-radius: sp.$radius-md;
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+    }
+
+    &__icon {
+      display: grid;
+      place-items: center;
+      width: 3rem;
+      height: 3rem;
+      margin-bottom: sp.space('xs');
+      border-radius: 50%;
+      background: var(--color-brand);
+      color: var(--color-text-inverse);
+    }
+
+    &__title {
+      margin-bottom: sp.space('3xs');
+    }
+
+    &__text {
+      color: var(--color-text-muted);
+      font-size: type.$font-size-sm;
+    }
+  }
+}

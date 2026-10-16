@@ -1,0 +1,199 @@
+// sass/components/_story-card.scss
+// Story card + the grid that holds it.
+//
+// CONTAINER QUERY: each grid item is a named container ("story-card").
+// The card reads the width of the slot it sits in, not the viewport:
+//   - narrow slot (< 18rem)  -> compact card, excerpt hidden
+//   - normal slot            -> stacked card (image on top)
+//   - wide slot  (>= 32rem)  -> horizontal card (image left, text right)
+// The same card therefore looks right in the home grid, in the story-page
+// sidebar and in the full-width related list on tablets.
+@use '../tokens/spacing' as sp;
+@use '../tokens/typography' as type;
+
+@layer components {
+  .story-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 17rem), 1fr));
+    gap: sp.space('lg') sp.space('md');
+    list-style: none;
+    padding: 0;
+
+    &--stack {
+      grid-template-columns: 1fr;
+      gap: sp.space('md');
+    }
+
+    &__item {
+      container: story-card / inline-size;
+    }
+  }
+
+  .story-card {
+    position: relative;
+    display: grid;
+    grid-template-rows: auto 1fr;
+    height: 100%;
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+    border-radius: sp.$radius-md;
+    background: var(--color-surface);
+    box-shadow: var(--shadow-sm);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+
+    &:hover,
+    &:focus-within {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+    }
+
+    &__media {
+      position: relative;
+      aspect-ratio: 16 / 9;
+      background: var(--color-brand-dark);
+      overflow: hidden;
+    }
+
+    // Absolutely positioned so the image fills the media box in every
+    // card layout without its own (often portrait) shape stretching the card.
+    &__img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+
+      .story-card:hover & {
+        transform: scale(1.04);
+      }
+
+      &--top {
+        object-position: top;
+      }
+    }
+
+    // Placeholder art for audio-only stories
+    &__audio-art {
+      display: grid;
+      place-items: center;
+      height: 100%;
+      background: radial-gradient(circle at 30% 30%, var(--color-brand-soft), var(--color-brand-dark));
+      color: var(--color-accent-soft);
+    }
+
+    &__badge {
+      position: absolute;
+      right: sp.space('2xs');
+      bottom: sp.space('2xs');
+      padding: 0.15rem sp.space('2xs');
+      border-radius: sp.$radius-sm;
+      background: rgba(59, 31, 18, 0.9);
+      color: var(--color-text-inverse);
+      font-size: type.$font-size-xs;
+      font-weight: type.$font-weight-semibold;
+    }
+
+    &__body {
+      display: flex;
+      flex-direction: column;
+      gap: sp.space('3xs');
+      padding: sp.space('sm');
+    }
+
+    &__tag {
+      font-size: type.$font-size-xs;
+      font-weight: type.$font-weight-semibold;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--color-brand-soft);
+    }
+
+    &__title {
+      font-size: type.$font-size-md;
+    }
+
+    // Stretched link: the whole card is clickable, but only the title is announced
+    &__link {
+      color: var(--color-brand-dark);
+      text-decoration: none;
+
+      &::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+      }
+
+      &:hover {
+        text-decoration: underline;
+      }
+
+      &:focus-visible {
+        outline: none;
+
+        &::after {
+          outline: 3px solid var(--focus-color);
+          outline-offset: -3px;
+          border-radius: sp.$radius-md;
+        }
+      }
+    }
+
+    &__excerpt {
+      font-size: type.$font-size-sm;
+      color: var(--color-text-muted);
+    }
+
+    &__meta {
+      margin-top: auto;
+      padding-top: sp.space('2xs');
+      font-size: type.$font-size-xs;
+      color: var(--color-text-muted);
+    }
+  }
+
+  // ---- Container queries ----
+  @container story-card (max-width: 18rem) {
+    .story-card__body {
+      padding: sp.space('xs');
+    }
+
+    .story-card__title {
+      font-size: type.$font-size-base;
+    }
+
+    .story-card__excerpt {
+      display: none;
+    }
+  }
+
+  @container story-card (min-width: 32rem) {
+    .story-card {
+      grid-template-rows: none;
+      grid-template-columns: 40% 1fr;
+    }
+
+    .story-card__media {
+      aspect-ratio: auto;
+      min-height: 100%;
+    }
+
+    .story-card__body {
+      padding: sp.space('md');
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .story-card,
+    .story-card__img {
+      transition: none;
+    }
+
+    .story-card:hover,
+    .story-card:focus-within,
+    .story-card:hover .story-card__img {
+      transform: none;
+    }
+  }
+}

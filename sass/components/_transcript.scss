@@ -1,0 +1,71 @@
+// sass/components/_transcript.scss
+// Transcript panel with a show/hide toggle (js/transcript.js adds aria-expanded behaviour).
+@use '../tokens/spacing' as sp;
+@use '../tokens/typography' as type;
+
+@layer components {
+  .transcript {
+    margin-top: sp.space('xl');
+    border: 1px solid var(--color-border);
+    border-left: 5px solid var(--color-brand);
+    border-radius: sp.$radius-md;
+    background: var(--color-surface-alt);
+
+    &__header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: sp.space('xs');
+      padding: sp.space('md') sp.space('md') 0;
+    }
+
+    &__title {
+      font-size: type.$font-size-xl;
+    }
+
+    &__note {
+      padding: sp.space('2xs') sp.space('md') 0;
+      font-size: type.$font-size-sm;
+      color: var(--color-text-muted);
+    }
+
+    &__toggle {
+      &[aria-expanded='false'] .transcript__toggle-icon {
+        transform: rotate(-90deg);
+      }
+    }
+
+    &__toggle-icon {
+      transition: transform 0.2s ease;
+    }
+
+    &__body {
+      max-width: type.$measure;
+      padding: sp.space('md');
+
+      &[hidden] {
+        display: none;
+      }
+
+      h3 {
+        margin: sp.space('md') 0 sp.space('2xs');
+        font-size: type.$font-size-md;
+      }
+
+      p + p {
+        margin-top: sp.space('xs');
+      }
+    }
+
+    &__speaker {
+      font-weight: type.$font-weight-semibold;
+      color: var(--color-brand);
+    }
+
+    &__sound {
+      font-style: italic;
+      color: var(--color-text-muted);
+    }
+  }
+}

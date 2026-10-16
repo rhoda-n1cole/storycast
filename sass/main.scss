@@ -1,0 +1,38 @@
+// StoryCast — main.scss
+// Compiles to css/main.css. Every partial wraps its rules in a cascade layer,
+// so specificity never decides between layers; the order below does.
+
+// 1. Layer order (must load first)
+@use 'layers';
+
+// 2. Tokens (colours emit CSS custom properties; the rest are Sass-only)
+@use 'tokens/colors';
+@use 'tokens/typography';
+@use 'tokens/spacing';
+@use 'tokens/breakpoints';
+
+// 3. Base
+@use 'base/reset';
+@use 'base/base';
+
+// 4. Layout
+@use 'layout/grid';
+@use 'layout/header';
+@use 'layout/footer';
+
+// 5. Components
+@use 'components/buttons';
+@use 'components/navigation';
+@use 'components/hero';
+@use 'components/story-card';
+@use 'components/media';
+@use 'components/transcript';
+@use 'components/schedule';
+
+// 6. Pages
+@use 'pages/home';
+@use 'pages/story';
+@use 'pages/about';
+
+// 7. Utilities (highest priority layer)
+@use 'utilities/accessibility';

@@ -1,0 +1,41 @@
+// sass/tokens/_colors.scss
+// Brand palette: chocolate brown + white.
+// Every text/background pair used on the site was checked against WCAG 2.1 AA
+// (ratios noted beside each token, measured against white or chocolate-900).
+
+$chocolate-900: #3B1F12; // 15.1:1 on white
+$chocolate-800: #4A2817; // 13.1:1 with white text
+$chocolate-700: #5C3317; // 10.8:1 on white (main brand colour)
+$chocolate-500: #7B4A2D; //  7.3:1 on white
+$caramel-400:   #D9A066; //  6.6:1 on chocolate-900 (focus ring on dark areas)
+$caramel-200:   #E8C9A6; //  9.6:1 on chocolate-900
+$cream-200:     #F3E7DB;
+$cream-100:     #FAF5EF;
+$white:         #FFFFFF;
+$muted:         #6E5547; //  6.3:1 on cream-100
+
+@layer tokens {
+  :root {
+    --color-brand: #{$chocolate-700};
+    --color-brand-dark: #{$chocolate-900};
+    --color-brand-deep: #{$chocolate-800};
+    --color-brand-soft: #{$chocolate-500};
+    --color-accent: #{$caramel-400};
+    --color-accent-soft: #{$caramel-200};
+
+    --color-surface: #{$white};
+    --color-surface-alt: #{$cream-100};
+    --color-surface-warm: #{$cream-200};
+
+    --color-text: #{$chocolate-900};
+    --color-text-muted: #{$muted};
+    --color-text-inverse: #{$white};
+
+    --color-border: rgba(59, 31, 18, 0.14);
+    --shadow-sm: 0 1px 3px rgba(59, 31, 18, 0.08);
+    --shadow-md: 0 10px 28px rgba(59, 31, 18, 0.14);
+
+    // Focus ring colour; dark regions override this with a light value.
+    --focus-color: #{$chocolate-700};
+  }
+}

@@ -1,0 +1,60 @@
+// sass/layout/_header.scss
+@use '../tokens/spacing' as sp;
+@use '../tokens/typography' as type;
+@use '../tokens/breakpoints' as bp;
+
+@layer layout {
+  .site-header {
+    --focus-color: var(--color-accent-soft);
+
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--color-brand-dark);
+    color: var(--color-text-inverse);
+    border-bottom: 3px solid var(--color-accent);
+
+    &__inner {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: sp.space('2xs') sp.space('md');
+      padding-block: sp.space('xs');
+    }
+
+    &__logo {
+      display: inline-flex;
+      align-items: center;
+      gap: sp.space('2xs');
+      color: inherit;
+      text-decoration: none;
+      font-family: type.$font-heading;
+      font-size: type.$font-size-lg;
+      font-weight: type.$font-weight-bold;
+
+      @include bp.up('md') {
+        font-size: 1.5rem;
+      }
+    }
+
+    &__logo-mark {
+      display: grid;
+      place-items: center;
+      width: 2.25rem;
+      height: 2.25rem;
+      border-radius: 50%;
+      background: var(--color-surface);
+      color: var(--color-brand);
+    }
+
+    &__logo-sub {
+      display: block;
+      font-family: type.$font-body;
+      font-size: type.$font-size-xs;
+      font-weight: type.$font-weight-regular;
+      color: var(--color-accent-soft);
+      letter-spacing: 0.04em;
+    }
+  }
+}

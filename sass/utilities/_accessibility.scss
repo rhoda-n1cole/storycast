@@ -1,0 +1,59 @@
+// sass/utilities/_accessibility.scss
+@use '../tokens/spacing' as sp;
+@use '../tokens/typography' as type;
+
+@layer utilities {
+  // Hide visually but keep available to screen readers
+  .visually-hidden {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+  }
+
+  // First focusable element on every page
+  .skip-link {
+    position: absolute;
+    top: sp.space('2xs');
+    left: sp.space('2xs');
+    z-index: 1000;
+    padding: sp.space('2xs') sp.space('sm');
+    border-radius: sp.$radius-sm;
+    background: var(--color-surface);
+    color: var(--color-brand-dark);
+    font-weight: type.$font-weight-semibold;
+    transform: translateY(-200%);
+
+    &:focus {
+      transform: translateY(0);
+    }
+  }
+
+  // [hidden] must win over component display values (e.g. .btn { display: inline-flex })
+  [hidden] {
+    display: none !important;
+  }
+
+  // Lets a small icon sit inside a line of text
+  .icon-inline svg {
+    display: inline-block;
+    vertical-align: -0.15em;
+  }
+
+  .text-muted {
+    color: var(--color-text-muted);
+  }
+
+  .text-center {
+    text-align: center;
+  }
+
+  .mt-lg {
+    margin-top: sp.space('lg');
+  }
+}

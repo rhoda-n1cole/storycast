@@ -1,0 +1,67 @@
+// sass/components/_navigation.scss
+// Primary site navigation and breadcrumb.
+@use '../tokens/spacing' as sp;
+@use '../tokens/typography' as type;
+
+@layer components {
+  .site-nav {
+    &__list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: sp.space('3xs');
+      list-style: none;
+      padding: 0;
+    }
+
+    &__link {
+      display: block;
+      padding: sp.space('2xs') sp.space('xs');
+      border-radius: sp.$radius-pill;
+      color: var(--color-text-inverse);
+      font-weight: type.$font-weight-semibold;
+      font-size: type.$font-size-sm;
+      text-decoration: none;
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.12);
+      }
+
+      // Current page is shown with more than colour alone (filled pill + aria-current)
+      &--active,
+      &[aria-current='page'] {
+        background: var(--color-surface);
+        color: var(--color-brand-dark);
+      }
+    }
+  }
+
+  .breadcrumb {
+    padding-top: sp.space('md');
+    font-size: type.$font-size-sm;
+
+    &__list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: sp.space('3xs');
+      list-style: none;
+      padding: 0;
+    }
+
+    &__item {
+      display: flex;
+      align-items: center;
+      gap: sp.space('3xs');
+      color: var(--color-text-muted);
+
+      & + &::before {
+        content: '/';
+        content: '/' / ''; // empty alt text: screen readers skip the separator
+        color: var(--color-text-muted);
+      }
+    }
+
+    &__link {
+      color: var(--color-brand);
+    }
+  }
+}

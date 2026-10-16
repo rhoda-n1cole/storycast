@@ -1,0 +1,66 @@
+// sass/components/_buttons.scss
+@use '../tokens/spacing' as sp;
+@use '../tokens/typography' as type;
+
+@layer components {
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: sp.space('2xs');
+    min-height: 2.75rem; // 44px touch target
+    padding: sp.space('xs') sp.space('md');
+    border: 2px solid transparent;
+    border-radius: sp.$radius-pill;
+    font-weight: type.$font-weight-semibold;
+    line-height: 1.2;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+
+    &:hover {
+      transform: translateY(-1px);
+    }
+
+    svg {
+      flex-shrink: 0;
+    }
+
+    // Chocolate button on light backgrounds
+    &--primary {
+      background: var(--color-brand);
+      color: var(--color-text-inverse);
+
+      &:hover {
+        background: var(--color-brand-dark);
+      }
+    }
+
+    // White button on dark backgrounds
+    &--light {
+      background: var(--color-surface);
+      color: var(--color-brand-dark);
+
+      &:hover {
+        background: var(--color-surface-warm);
+      }
+    }
+
+    // Outline button; inherits text colour so it works on light and dark areas
+    &--outline {
+      background: transparent;
+      color: inherit;
+      border-color: currentColor;
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.12);
+      }
+    }
+
+    &--small {
+      min-height: 2.25rem;
+      padding: sp.space('3xs') sp.space('sm');
+      font-size: type.$font-size-sm;
+    }
+  }
+}

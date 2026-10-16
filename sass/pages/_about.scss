@@ -1,0 +1,195 @@
+// sass/pages/_about.scss
+// About / Access page.
+@use '../tokens/spacing' as sp;
+@use '../tokens/typography' as type;
+@use '../tokens/breakpoints' as bp;
+
+@layer pages {
+  .page-hero {
+    --focus-color: var(--color-accent-soft);
+
+    padding-block: sp.space('2xl');
+    background:
+      linear-gradient(135deg, rgba(59, 31, 18, 0.94), rgba(92, 51, 23, 0.9)),
+      url('../assets/images/christ-lives-in-me-poster.jpg') center / cover no-repeat;
+    color: var(--color-text-inverse);
+
+    &__title {
+      color: inherit;
+      margin-bottom: sp.space('xs');
+    }
+
+    &__lead {
+      max-width: 42rem;
+      font-size: type.$font-size-md;
+      color: var(--color-accent-soft);
+    }
+  }
+
+  // Mission / vision / values cards
+  .info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
+    gap: sp.space('md');
+    list-style: none;
+    padding: 0;
+  }
+
+  .info-card {
+    height: 100%;
+    padding: sp.space('md');
+    border: 1px solid var(--color-border);
+    border-top: 5px solid var(--color-brand);
+    border-radius: sp.$radius-md;
+    background: var(--color-surface);
+
+    &__title {
+      margin-bottom: sp.space('2xs');
+    }
+
+    &__text {
+      color: var(--color-text-muted);
+    }
+
+    &__list {
+      display: grid;
+      gap: sp.space('3xs');
+      padding-left: sp.space('md');
+      color: var(--color-text-muted);
+    }
+  }
+
+  // About the church: text + photo
+  .church {
+    display: grid;
+    gap: sp.space('lg');
+    align-items: center;
+
+    @include bp.up('md') {
+      grid-template-columns: 1.2fr 1fr;
+    }
+
+    &__text > * + * {
+      margin-top: sp.space('sm');
+    }
+
+    &__img {
+      width: 100%;
+      border-radius: sp.$radius-lg;
+      box-shadow: var(--shadow-md);
+    }
+
+    &__caption {
+      margin-top: sp.space('2xs');
+      font-size: type.$font-size-sm;
+      color: var(--color-text-muted);
+    }
+  }
+
+  // Accessibility features list
+  .feature-list {
+    display: grid;
+    gap: sp.space('sm');
+    list-style: none;
+    padding: 0;
+
+    @include bp.up('md') {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  .feature {
+    display: flex;
+    gap: sp.space('sm');
+    padding: sp.space('md');
+    border-radius: sp.$radius-md;
+    background: var(--color-surface);
+    border-left: 5px solid var(--color-brand);
+    box-shadow: var(--shadow-sm);
+
+    &__icon {
+      flex-shrink: 0;
+      color: var(--color-brand);
+    }
+
+    &__title {
+      margin-bottom: sp.space('3xs');
+      font-size: type.$font-size-md;
+    }
+
+    &__text {
+      color: var(--color-text-muted);
+      font-size: type.$font-size-sm;
+    }
+  }
+
+  // How to engage: numbered steps
+  .steps {
+    display: grid;
+    gap: sp.space('sm');
+    counter-reset: step;
+    list-style: none;
+    padding: 0;
+
+    @include bp.up('md') {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    &__item {
+      position: relative;
+      padding: sp.space('lg') sp.space('md') sp.space('md');
+      border-radius: sp.$radius-md;
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      counter-increment: step;
+
+      &::before {
+        content: counter(step);
+        position: absolute;
+        top: -1rem;
+        left: sp.space('md');
+        display: grid;
+        place-items: center;
+        width: 2.25rem;
+        height: 2.25rem;
+        border-radius: 50%;
+        background: var(--color-brand);
+        color: var(--color-text-inverse);
+        font-weight: type.$font-weight-bold;
+      }
+    }
+
+    &__title {
+      margin-bottom: sp.space('3xs');
+    }
+
+    &__text {
+      color: var(--color-text-muted);
+      font-size: type.$font-size-sm;
+    }
+  }
+
+  .contact-card {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: sp.space('md');
+    padding: sp.space('lg');
+    border-radius: sp.$radius-lg;
+    background: var(--color-brand-dark);
+    color: var(--color-text-inverse);
+
+    --focus-color: var(--color-accent-soft);
+
+    &__title {
+      color: inherit;
+      font-size: type.$font-size-xl;
+      margin-bottom: sp.space('3xs');
+    }
+
+    &__text {
+      color: var(--color-accent-soft);
+    }
+  }
+}

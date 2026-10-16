@@ -1,0 +1,65 @@
+// sass/components/_schedule.scss
+// Weekly service times (Tuesday – Sunday).
+@use '../tokens/spacing' as sp;
+@use '../tokens/typography' as type;
+
+@layer components {
+  .schedule {
+    &__list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 10rem), 1fr));
+      gap: sp.space('sm');
+      list-style: none;
+      padding: 0;
+    }
+
+    &__item {
+      display: flex;
+      flex-direction: column;
+      gap: sp.space('3xs');
+      padding: sp.space('md');
+      border: 1px solid var(--color-border);
+      border-top: 5px solid var(--color-brand-soft);
+      border-radius: sp.$radius-md;
+      background: var(--color-surface);
+
+      // Morning services are marked by text AND colour, not colour alone
+      &--morning {
+        border-top-color: var(--color-accent);
+        background: var(--color-brand-dark);
+        color: var(--color-text-inverse);
+
+        .schedule__day {
+          color: inherit;
+        }
+
+        .schedule__label {
+          color: var(--color-accent-soft);
+        }
+      }
+    }
+
+    &__day {
+      font-family: type.$font-heading;
+      font-size: type.$font-size-md;
+      font-weight: type.$font-weight-bold;
+      color: var(--color-brand-dark);
+    }
+
+    &__time {
+      font-size: type.$font-size-lg;
+      white-space: nowrap;
+      font-weight: type.$font-weight-bold;
+    }
+
+    &__label {
+      font-size: type.$font-size-sm;
+      color: var(--color-text-muted);
+    }
+
+    &__note {
+      margin-top: sp.space('md');
+      color: var(--color-text-muted);
+    }
+  }
+}

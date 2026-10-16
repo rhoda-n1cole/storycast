@@ -1,0 +1,72 @@
+// sass/layout/_grid.scss
+// Page-level layout objects: container, sections and the story detail grid.
+@use '../tokens/spacing' as sp;
+@use '../tokens/typography' as type;
+@use '../tokens/breakpoints' as bp;
+
+@layer layout {
+  .container {
+    width: 100%;
+    max-width: sp.$container-max;
+    margin-inline: auto;
+    padding-inline: sp.$gutter;
+
+    @include bp.up('md') {
+      padding-inline: sp.space('lg');
+    }
+  }
+
+  .section {
+    padding-block: sp.space('2xl');
+
+    &--alt {
+      background: var(--color-surface-alt);
+    }
+
+    &--warm {
+      background: var(--color-surface-warm);
+    }
+
+    &__header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: sp.space('sm');
+      margin-bottom: sp.space('lg');
+    }
+
+    &__eyebrow {
+      display: block;
+      margin-bottom: sp.space('2xs');
+      font-family: type.$font-body;
+      font-size: type.$font-size-sm;
+      font-weight: type.$font-weight-semibold;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--color-brand-soft);
+    }
+
+    &__title {
+      font-size: type.$font-size-2xl;
+    }
+
+    &__intro {
+      max-width: type.$measure;
+      margin-top: sp.space('2xs');
+      color: var(--color-text-muted);
+    }
+  }
+
+  // Story detail: main column + related-stories sidebar (Grid).
+  .story-layout {
+    display: grid;
+    gap: sp.space('xl');
+    padding-block: sp.space('lg') sp.space('2xl');
+
+    @include bp.up('lg') {
+      grid-template-columns: minmax(0, 1fr) 20rem;
+      align-items: start;
+    }
+  }
+}

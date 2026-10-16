@@ -1,0 +1,3 @@
+// sass/_layers.scss
+// Cascade layer order: later layers win over earlier ones.
+@layer reset, tokens, base, layout, components, pages, utilities;

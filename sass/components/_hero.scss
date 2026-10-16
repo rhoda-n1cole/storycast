@@ -1,0 +1,141 @@
+// sass/components/_hero.scss
+// Home hero with a muted YouTube background video (js/hero.js).
+@use '../tokens/spacing' as sp;
+@use '../tokens/typography' as type;
+@use '../tokens/breakpoints' as bp;
+
+@layer components {
+  .hero {
+    --focus-color: var(--color-accent-soft);
+
+    position: relative;
+    display: grid;
+    align-items: center;
+    min-height: min(88vh, 46rem);
+    overflow: hidden;
+    color: var(--color-text-inverse);
+    // Poster shown before the video loads (and if it never does)
+    background: var(--color-brand-dark) url('https://i.ytimg.com/vi/2NlxgIA2dkM/maxresdefault.jpg') center / cover no-repeat;
+
+    &__media {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+
+      // Cover the hero with a 16:9 iframe whatever the hero's shape
+      iframe {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: max(100%, 177.78vh);
+        height: max(100%, 56.25vw);
+        max-width: none;
+        transform: translate(-50%, -50%);
+        border: 0;
+      }
+    }
+
+    // Chocolate overlay keeps white text above 4.5:1 over any video frame
+    &__overlay {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, rgba(59, 31, 18, 0.72) 0%, rgba(59, 31, 18, 0.88) 100%);
+    }
+
+    &__content {
+      position: relative;
+      z-index: 1;
+      max-width: 46rem;
+      padding-block: sp.space('3xl') sp.space('2xl');
+    }
+
+    &__eyebrow {
+      display: inline-block;
+      margin-bottom: sp.space('sm');
+      padding: sp.space('3xs') sp.space('xs');
+      border: 1px solid var(--color-accent-soft);
+      border-radius: sp.$radius-pill;
+      font-size: type.$font-size-sm;
+      font-weight: type.$font-weight-semibold;
+      color: var(--color-accent-soft);
+    }
+
+    &__title {
+      color: inherit;
+      margin-bottom: sp.space('sm');
+      text-shadow: 0 2px 12px rgba(0, 0, 0, 0.35);
+    }
+
+    &__lead {
+      font-size: type.$font-size-md;
+      margin-bottom: sp.space('lg');
+
+      @include bp.up('md') {
+        font-size: type.$font-size-lg;
+      }
+    }
+
+    &__actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: sp.space('xs');
+    }
+
+    // Video credit + controls bar
+    &__footer {
+      position: absolute;
+      inset: auto 0 0;
+      z-index: 1;
+    }
+
+    &__footer-inner {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: sp.space('2xs');
+      padding-block: sp.space('sm');
+    }
+
+    &__credit {
+      max-width: 36rem;
+      font-size: type.$font-size-xs;
+      color: var(--color-accent-soft);
+
+      a {
+        color: var(--color-text-inverse);
+      }
+    }
+
+    &__controls {
+      display: flex;
+      gap: sp.space('2xs');
+
+      &[hidden] {
+        display: none;
+      }
+    }
+
+    &__control {
+      display: inline-flex;
+      align-items: center;
+      gap: sp.space('3xs');
+      min-height: 2.75rem;
+      padding: sp.space('2xs') sp.space('sm');
+      border: 2px solid rgba(255, 255, 255, 0.6);
+      border-radius: sp.$radius-pill;
+      background: rgba(59, 31, 18, 0.75);
+      color: var(--color-text-inverse);
+      font-size: type.$font-size-sm;
+      font-weight: type.$font-weight-semibold;
+      cursor: pointer;
+
+      &:hover {
+        background: var(--color-brand-dark);
+        border-color: var(--color-text-inverse);
+      }
+    }
+  }
+}

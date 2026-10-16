@@ -1,0 +1,22 @@
+// sass/tokens/_typography.scss
+
+$font-body: 'Poppins', 'Segoe UI', Arial, sans-serif;
+$font-heading: 'Merriweather', Georgia, serif;
+
+$font-size-xs: 0.8125rem;  // 13px
+$font-size-sm: 0.875rem;   // 14px
+$font-size-base: 1rem;     // 16px
+$font-size-md: 1.125rem;   // 18px
+$font-size-lg: 1.25rem;    // 20px
+$font-size-xl: clamp(1.5rem, 1.2rem + 1.2vw, 2rem);
+$font-size-2xl: clamp(1.75rem, 1.3rem + 2vw, 2.5rem);
+$font-size-3xl: clamp(2.1rem, 1.4rem + 3.4vw, 3.5rem);
+
+$font-weight-regular: 400;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+
+$line-height-base: 1.65;
+$line-height-heading: 1.25;
+
+$measure: 68ch; // comfortable reading width for transcripts

@@ -1,0 +1,159 @@
+// sass/pages/_story.scss
+// Story detail page: article, takeaways, related stories, previous/next.
+@use '../tokens/spacing' as sp;
+@use '../tokens/typography' as type;
+@use '../tokens/breakpoints' as bp;
+
+@layer pages {
+  .story {
+    min-width: 0; // lets the grid column shrink below the iframe's width
+
+    &__header {
+      margin-bottom: sp.space('md');
+    }
+
+    &__eyebrow {
+      display: inline-block;
+      margin-bottom: sp.space('2xs');
+      padding: sp.space('3xs') sp.space('xs');
+      border-radius: sp.$radius-pill;
+      background: var(--color-surface-warm);
+      color: var(--color-brand);
+      font-size: type.$font-size-sm;
+      font-weight: type.$font-weight-semibold;
+    }
+
+    &__title {
+      font-size: type.$font-size-3xl;
+    }
+
+    &__subtitle {
+      margin-top: sp.space('2xs');
+      font-size: type.$font-size-md;
+      font-style: italic;
+      color: var(--color-text-muted);
+    }
+
+    // Story facts: speaker, date, length, language, scripture (<dl>)
+    &__facts {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 9rem), 1fr));
+      gap: sp.space('xs');
+      margin-top: sp.space('md');
+      padding: sp.space('sm');
+      border-radius: sp.$radius-md;
+      background: var(--color-surface-alt);
+      border: 1px solid var(--color-border);
+
+      dt {
+        font-size: type.$font-size-xs;
+        font-weight: type.$font-weight-semibold;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--color-text-muted);
+      }
+
+      dd {
+        margin: 0;
+        font-weight: type.$font-weight-semibold;
+        color: var(--color-brand-dark);
+      }
+    }
+
+    &__body {
+      max-width: type.$measure;
+
+      > * + * {
+        margin-top: sp.space('sm');
+      }
+
+      h2 {
+        margin-top: sp.space('xl');
+        font-size: type.$font-size-xl;
+      }
+    }
+
+    &__scripture {
+      padding: sp.space('md');
+      border-radius: sp.$radius-md;
+      background: var(--color-brand-dark);
+      color: var(--color-text-inverse);
+      font-family: type.$font-heading;
+      font-size: type.$font-size-md;
+
+      footer {
+        margin-top: sp.space('2xs');
+        font-family: type.$font-body;
+        font-size: type.$font-size-sm;
+        color: var(--color-accent-soft);
+      }
+    }
+
+    &__takeaways {
+      display: grid;
+      gap: sp.space('2xs');
+      padding-left: sp.space('md');
+
+      li::marker {
+        color: var(--color-brand);
+        font-weight: type.$font-weight-bold;
+      }
+    }
+  }
+
+  .related {
+    @include bp.up('lg') {
+      position: sticky;
+      top: 6rem;
+    }
+
+    &__title {
+      margin-bottom: sp.space('md');
+      font-size: type.$font-size-xl;
+    }
+  }
+
+  .story-pager {
+    display: grid;
+    gap: sp.space('sm');
+    margin-top: sp.space('xl');
+    padding-top: sp.space('lg');
+    border-top: 1px solid var(--color-border);
+
+    @include bp.up('sm') {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    &__link {
+      display: flex;
+      flex-direction: column;
+      gap: sp.space('3xs');
+      padding: sp.space('sm');
+      border: 1px solid var(--color-border);
+      border-radius: sp.$radius-md;
+      text-decoration: none;
+      color: var(--color-brand-dark);
+      font-weight: type.$font-weight-semibold;
+
+      &:hover {
+        background: var(--color-surface-alt);
+      }
+
+      &--next {
+        text-align: right;
+
+        @include bp.up('sm') {
+          grid-column: 2;
+        }
+      }
+    }
+
+    &__label {
+      font-size: type.$font-size-xs;
+      font-weight: type.$font-weight-regular;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--color-text-muted);
+    }
+  }
+}
